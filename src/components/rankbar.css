@@ -1,0 +1,35 @@
+.rank {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.name {
+  box-sizing: border-box;
+  text-align: right;
+  padding-right: 10px;
+  font-size: 28px;
+  width: 45%;
+}
+
+.bar {
+  width: 55%;
+  height: 30px;
+}
+
+
+.inner {
+  position: relative;
+  height: 100%;
+  background: #1AAD19;
+  background: #26e89a;
+  border-radius: 10px;
+}
+
+.inner span{
+  position: absolute;
+  padding-left: 10px;
+  right: 0;
+  display: inline-block;
+  transform: translateX(100%);
+}

@@ -1,0 +1,34 @@
+
+
+* {
+    box-sizing: border-box;
+}
+
+:global(.text-white) {
+    color: #fff;
+}
+
+:global(.text-center) {
+    text-align: center;
+}
+
+:global(.table-cell) {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+:global(.yuan) {
+    vertical-align: middle;
+    font-size: 35rpx;
+}
+
+
+:global(.container) {
+    margin-bottom: 110px;
+    width: 100%;
+}
+
+/*:global(.content) {
+    padding: 10px 15px;
+}*/

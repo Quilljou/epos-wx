@@ -1,0 +1,72 @@
+import {routerRedux} from 'dva/router';
+import { queryBranch,queryUser } from '../services/app'
+
+export default {
+  namespace : 'app',
+  state : {
+    selectedBar: 'home',
+    branches: [],
+    branchId: null,
+    user: {}
+  },
+  reducers : {
+    changeSelectedBar(state, action) {
+      const {selectedBar} = action.payload;
+      // routerRedux.push(`/${selectedBar}`);
+      return {
+        ...state,
+        selectedBar
+      };
+    },
+    queryBranchSuccess(state, action) {
+      return {...state,...action.payload.data};
+    },
+    queryUserSuccess(state, action) {
+
+      return {...state,user: action.payload.data};
+    }
+  },
+  effects : {
+    *queryBranch({
+      payload
+    }, {call, put}) {
+      const data = yield call(queryBranch, payload);
+      if (data) {
+        yield put(
+          {
+            type: 'queryBranchSuccess',
+           payload: data
+         })
+      }
+    },
+    *queryUser({
+      payload
+    }, {call, put}) {
+      const data = yield call(queryUser, payload);
+      if (data) {
+        yield put(
+          {
+            type: 'queryUserSuccess',
+           payload: data
+         })
+      }
+    }
+  },
+  subscriptions: {
+    setup({history,dispatch}){
+      history.listen((location) => {
+        if(location.pathname === '/home') {
+          dispatch({
+            type: 'queryBranch'
+          })
+        }
+
+        if(location.pathname === '/me') {
+          dispatch({
+            type: 'queryUser'
+          })
+        }
+      })
+    }
+  }
+}

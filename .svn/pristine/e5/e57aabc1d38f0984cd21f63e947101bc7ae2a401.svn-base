@@ -1,0 +1,46 @@
+import {Picker, List} from 'antd-mobile';
+import React from 'react';
+
+export default class BranchPicker extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      value: []
+    }
+  }
+
+  onChaneBranch(val) {
+    const { changeBranch } = this.props;
+    this.setState({
+      value: val
+    })
+    changeBranch(val[0]);
+  }
+
+  render() {
+    const { branches } = this.props;
+
+    const data = branches.map((item) => {
+      let newItem = {};
+      newItem.label = item.name;
+      newItem.value = item.id;
+      return newItem;
+    });
+
+    data.unshift({
+      label: '全部门店',
+      value: -1
+    })
+
+    return (
+      <Picker
+        data={data}
+        cols={1}
+        value={this.state.value}
+        onChange= {(val) => this.onChaneBranch(val)}>
+        <List.Item arrow="horizontal">选择门店</List.Item>
+      </Picker>
+    )
+  }
+
+}

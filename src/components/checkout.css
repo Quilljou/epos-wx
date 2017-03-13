@@ -1,0 +1,15 @@
+.total {
+    box-sizing: border-box;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    bottom: 0;
+    height: 80px;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border-top: 1px solid #26e89a;
+    margin-bottom: 100px;
+}

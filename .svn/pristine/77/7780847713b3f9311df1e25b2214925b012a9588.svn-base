@@ -1,0 +1,40 @@
+import { query } from '../services/home';
+import { betweenToday } from '../utils/util';
+
+export default {
+  namespace : 'home',
+  state : {
+    branches: [],
+    basic: {},
+    income: [],
+    dishes: [],
+  },
+  reducers : {
+    querySuccess (state,action) {
+      return {...state,...action.payload.data};
+    }
+  },
+  effects : {
+    *query ({ payload }, { call, put}) {
+      const data =  yield call(query,payload);
+      if(data) {
+        yield put({
+          type: 'querySuccess',
+          payload: data
+        })
+      }
+    }
+  },
+  subscriptions : {
+    setup({history, dispatch}) {
+      history.listen((location) => {
+        if (location.pathname === '/home') {
+          dispatch({
+            type: 'query',
+            payload: betweenToday()
+          })
+        }
+      })
+    }
+  }
+};

@@ -1,0 +1,33 @@
+.list {
+  display: flex;
+  height: 80px;
+  padding: 0 40px;
+  margin-bottom: 10px;
+  /*padding-bottom: 10px;*/
+  border-bottom: 1px solid #ccc;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.logo img{
+  width: 50px;
+  height: 50px;
+}
+.content {
+  flex: 1;
+  display: flex;
+  color: #1AAD19;
+  color: #26e89a;
+  align-items: center;
+  justify-content: flex-end
+}
+
+.name  {
+  color: #b3b3b3;
+  font-size: 28px;
+  margin-left: 10px;
+}

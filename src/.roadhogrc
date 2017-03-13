@@ -1,0 +1,35 @@
+{
+  "entry": "src/index.js",
+  "env": {
+    "development": {
+    "autoprefixer": {
+        "browsers": [
+          "iOS >= 8", "Android >= 4"
+        ]
+      },
+      "extraBabelPlugins": [
+        "dva-hmr",
+        "transform-runtime",
+        ["import", { "libraryName": "antd-mobile", "style": true }]
+      ],
+      "proxy": {
+         "/api": {
+           "target": "http://112.74.34.58:80",
+           "changeOrigin": true,
+           "pathRewrite": { "^/api?" : "" }
+         }
+       }
+    },
+    "production": {
+      "autoprefixer": {
+        "browsers": [
+          "iOS >= 8", "Android >= 4"
+        ]
+      },
+      "extraBabelPlugins": [
+        "transform-runtime",
+        ["import", { "libraryName": "antd-mobile", "style": true }]
+      ]
+    }
+  }
+}

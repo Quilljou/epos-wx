@@ -1,0 +1,76 @@
+.banner {
+    width: 100%;
+    height: 300px;
+    background: #233;
+}
+
+.boxOne {
+    background: linear-gradient(50deg,#FFCF0C,#FFD632);
+}
+
+.boxTwo {
+    background: linear-gradient(50deg,#DD567C,#F37279);
+}
+
+.boxThree {
+    background: linear-gradient(50deg,#02AAF5,#00D4FC);
+}
+
+
+.list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+
+
+.listTitle {
+    font-weight: bold;
+}
+
+.list > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    flex: 1;
+}
+
+
+.list img{
+  width: 50px;
+  height: 50px;
+  margin: 0 10px;
+}
+
+.picker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.user {
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+.user img {
+    width: 120px;
+    height: 120px;
+    border-radius: inherit;
+}
+
+.name {
+    margin-left: 20px;
+}
