@@ -38,8 +38,6 @@ export default {
       payload
     }, {call, put, select}) {
 
-
-
       const report = yield select(state => state.report);
       let { start, end } = report.time;
 
