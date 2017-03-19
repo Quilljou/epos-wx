@@ -9,7 +9,9 @@ import Helmet from 'react-helmet';
 const Item = List.Item;
 
 function Me({dispatch, app}) {
-    const { user } = app;
+    let { user } = app;
+    user = user || {};
+
     function onLogOut() {
         dispatch({
             type: 'auth/logOut'
