@@ -27,7 +27,8 @@ export default {
       return {...state,time: {...state.time,...action.payload}}
     },
     queryBranchSuccess(state, action) {
-      return {...state,...action.payload.data};
+      const { records: branches , branchId } = action.payload.data;
+      return {...state, branches, branchId };
     },
     changeBranch (state,action) {
       return {...state,...action.payload};

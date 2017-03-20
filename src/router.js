@@ -18,7 +18,7 @@ function requireAuth () {
 function RouterConfig({ history }) {
   return (
     <Router history={history}>
-      <Route path="/" component={App} >
+      <Route path="/" component={App} onEnter={requireAuth}>
           <IndexRedirect to="home"></IndexRedirect>
           <Route path="home" component={Home} onEnter={requireAuth}></Route>
           <Route path="report" component={Report} onEnter={requireAuth}></Route>

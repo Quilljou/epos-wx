@@ -70,7 +70,7 @@ export  function request (options) {
 }
 
 export function getUrl(url) {
-  const base = 'http://112.74.34.58:80';
+  const base = 'http://112.74.34.58';
   // var base = '/api';
   return base + url;
 }

@@ -16,7 +16,8 @@ export default {
       return {...state,...action.payload.data};
     },
     queryBranchSuccess(state, action) {
-      return {...state,...action.payload.data};
+      const { records: branches , branchId } = action.payload.data;
+      return {...state, branches, branchId };
     },
     changeBranch (state,action) {
       return {...state,...action.payload};
@@ -25,7 +26,7 @@ export default {
   effects : {
     *query ({ payload }, { call, put}) {
       const data =  yield call(query,payload);
-      
+
       if(data) {
         yield put({
           type: 'querySuccess',
