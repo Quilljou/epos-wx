@@ -38,7 +38,7 @@ function Me({dispatch, app}) {
               </WingBlank>
 
               <List>
-                  <Item extra={user.address || '无'}>门店地址</Item>
+                  <Item extra={user.address || '无'}>地址</Item>
               </List>
               <WhiteSpace size="xs" />
               <List>
@@ -46,7 +46,13 @@ function Me({dispatch, app}) {
               </List>
               <WhiteSpace size="xs" />
               <List>
-                  <Item extra={user['created_at'] || '无'}>创建日期</Item>
+                  <Item extra={user['created_at'] || '无'}>账号创建日期</Item>
+              </List>
+              <List>
+                  <Item extra={user['expiredTime'] || '无'}>账号失效日期</Item>
+              </List>
+              <List>
+                  <Item extra={user['validatePeriod'] ? user['validatePeriod']+'年' :'无'}>有效期</Item>
               </List>
               <WhiteSpace size="lg" />
 

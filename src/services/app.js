@@ -5,7 +5,10 @@ import qs from 'qs'
 export async function queryBranch(payload) {
 
     return request({
-        url: getUrl('/branch/all')
+        url: getUrl('/branch'),
+        params: {
+        	page: -1
+        }
     })
 }
 
