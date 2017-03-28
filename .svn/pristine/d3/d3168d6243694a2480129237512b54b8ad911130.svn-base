@@ -48,11 +48,9 @@ function Me({dispatch, app}) {
               <List>
                   <Item extra={user['created_at'] || '无'}>账号创建日期</Item>
               </List>
-              <WhiteSpace size="xs" />
               <List>
                   <Item extra={user['expiredTime'] || '无'}>账号失效日期</Item>
               </List>
-              <WhiteSpace size="xs" />
               <List>
                   <Item extra={user['validatePeriod'] ? user['validatePeriod']+'年' :'无'}>有效期</Item>
               </List>
