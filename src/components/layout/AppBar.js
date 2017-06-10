@@ -16,7 +16,7 @@ function AppBar ({
            barTintColor="white"
          >
             <TabBarItem
-               title="首页"
+               title="报表"
                key="home"
                selected = {selectedBar === 'home'}
                onPress = { () => changeSelectedBar('home') }
@@ -29,34 +29,19 @@ function AppBar ({
                data-seed="logId">
             </TabBarItem>
 
-
             <TabBarItem
-                title="报表"
-                key="report"
-                icon={<img
-                    className={styles.icon}
-                     src={require('../../assets/img/trade.png')} alt=""/>}
-                selectedIcon={<img
-                    className={styles.icon}
-                     src={require('../../assets/img/trade-selected.png')} alt=""/>}
-              selected = {selectedBar === 'report'}
-              onPress = { () => changeSelectedBar('report') }
-              data-seed="logId">
-        </TabBarItem>
-
-        <TabBarItem
-         title="我的"
-         key="me"
-         selected = {selectedBar === 'me'}
-         onPress = { () => changeSelectedBar('me') }
-         icon={<img
-             className={styles.icon}
-              src={require('../../assets/img/account.png')} alt=""/>}
-         selectedIcon={<img
-             className={styles.icon}
-              src={require('../../assets/img/account-selected.png')} alt=""/>}
-         data-seed="logId">
-        </TabBarItem>
+             title="我的"
+             key="me"
+             selected = {selectedBar === 'me'}
+             onPress = { () => changeSelectedBar('me') }
+             icon={<img
+                 className={styles.icon}
+                  src={require('../../assets/img/account.png')} alt=""/>}
+             selectedIcon={<img
+                 className={styles.icon}
+                  src={require('../../assets/img/account-selected.png')} alt=""/>}
+             data-seed="logId">
+            </TabBarItem>
          </TabBar>
     )
 

@@ -1,20 +1,22 @@
+import { hashHistory } from 'dva/router';
+
 export function cookData(data) {
-    switch (data.paymentId) {
-            case -1:
-                data.name = '现金';
-                data.icon = require('../assets/img/money.png');
-                break;
-            case -2:
-                data.name = '支付宝';
+    switch (data.name) {
+            // case -1:
+            //     // data.name = '现金';
+            //     data.icon = require('../assets/img/money.png');
+            //     break;
+            case '支付宝':
+                // data.name = '支付宝';
                 data.icon = require('../assets/img/alipay.png');
                 break;
-            case -3:
-                data.name = '微信支付';
+            case '微信':
+                // data.name = '微信';
                 data.icon = require('../assets/img/wechat.png');
                 break;
             default:
                 data.icon = require('../assets/img/cash.png');
-                data.name = data.name || '无'
+                // data.name = data.name || '无'
                 return
         }
 }
@@ -107,4 +109,9 @@ export  function betweenToday() {
       start: date + ' 00:00:00',
       end: date + ' 23:59:59',
     };
+}
+
+
+export function goTo(path) {
+  hashHistory.push(path);
 }

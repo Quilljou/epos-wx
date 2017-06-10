@@ -9,18 +9,12 @@ export default function BranchPicker (props) {
   temp[0] = branchId;
 
 
-
     const data = branches.map((item) => {
       let newItem = {};
       newItem.label = item.name;
       newItem.value = item.id;
       return newItem;
     });
-
-    data.unshift({
-      label: '全部门店',
-      value: -1
-    })
 
     return (
       <Picker

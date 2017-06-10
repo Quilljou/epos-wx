@@ -48,7 +48,7 @@ function Login({dispatch,children, form}) {
                 placeholder="用户ID"
                 {
                     ...getFieldProps('userId', {
-                        onChange(){}, // have to write original onChange here if you need
+                        onChange(){},
                         rules: [{required: true}],
                       })
                 }

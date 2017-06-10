@@ -123,7 +123,7 @@ class Report extends React.Component {
 										return (
 												<div className={styles.list} key={index}>
 														<div><img src={item.icon} />{item.name}</div>
-														<div>{item.amount}</div>
+														{/* <div>{item.amount}</div> */}
 														<div><span className="yuan">￥</span> {item.totalPrice}</div>
 												</div>
 										)

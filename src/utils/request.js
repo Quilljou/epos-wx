@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { toast } from 'antd-mobile';
+import { Toast } from 'antd-mobile';
 import { hashHistory } from 'dva/router';
 import  Auth from './auth';
 
@@ -30,7 +30,7 @@ function checkLogin(response) {
     if(response.data && response.data.login === false) {
       hashHistory.push('/login');
       Auth.logout();
-      toast.fail(response.data.message);
+      Toast.fail(response.data.message);
       return false;
     }
   }
@@ -42,35 +42,34 @@ function checkLogin(response) {
 
 
 export  function request (options) {
-    const token = localStorage.getItem('token');
-    if(token) {
-      const headers = {
-          Authorization: "Bearer " + token
-        }
-        if(!options.headers) {
-          options.headers = {};
-        }
-        options.headers.Authorization = "Bearer " + token;
-    //   options.headers = Object.assign({},options.headers,headers)
-    }
+    // const token = localStorage.getItem('token');
+    // if(token) {
+    //   const headers = {
+    //       Authorization: "Bearer " + token
+    //     }
+    //     if(!options.headers) {
+    //       options.headers = {};
+    //     }
+    //     options.headers.Authorization = "Bearer " + token;
+    // //   options.headers = Object.assign({},options.headers,headers)
+    // }
 
     return axios(options)
-    .then(checkLogin)
-    // .then(checkStatus)
+    // .then(checkLogin)
+    .then(checkStatus)
     .then((response) => {
-      if(options.nofilter === true) {
-        return response;
-      }else {
-        return response.data;
+      if(!response.status) {
+        Toast.info(response.message,2,null,false)
       }
+      return response;
     })
     .catch((err) => {
-      toast.info('网络错误，请稍后重试',2)
+      Toast.info('网络错误，请稍后重试',2,null,false)
     })
 }
 
 export function getUrl(url) {
-  const base = 'http://112.74.34.58/api/v1';
+  const base = '/api/v1';
   // var base = '/api';
   return base + url;
 }
