@@ -63,6 +63,7 @@ export default {
       })
     },
 
+    // 初始化app，查询机器和数据
     *queryMachine({
       payload
     }, {call, put, select}) {
@@ -71,6 +72,7 @@ export default {
 
       let { start, end } = app;
 
+      // 只有存在机器的时候才继续
       if(machine && machine.length) {
         const { id, password } = machine[0];
 
@@ -89,24 +91,26 @@ export default {
           end: end.format('YYYY-MM-DD')
         });
 
+        // 返回正确数据显示
         if(response && response.status) {
           yield put({
               type: 'save',
               payload: response.data
           })
-        }else {
-          yield put({
-              type: 'save',
-              payload: {
-                payment: [],
-                discount: [],
-                refundQty: 0,
-                refundSum: 0,
-                tradeQty: 0,
-                tradeSum: 0
-              }
-          })
         }
+        // else {
+        //   yield put({
+        //       type: 'save',
+        //       payload: {
+        //         payment: [],
+        //         discount: [],
+        //         refundQty: 0,
+        //         refundSum: 0,
+        //         tradeQty: 0,
+        //         tradeSum: 0
+        //       }
+        //   })
+        // }
       }
     },
 
@@ -120,13 +124,15 @@ export default {
       machine = machine.filter((item) => {
         return item.id !== id;
       })
+
+      // 如果删除的是当前选中的机器，改变当前机器为第一台
       if(selectedMachine === id && machine.length) {
         selectedMachine = machine[0].id;
       }
 
       Toast.info('删除成功', 1.5,null, false);
 
-
+      // 清除数据，反正进入报表页面会再次请求
       yield put({
           type: 'save',
           payload: {

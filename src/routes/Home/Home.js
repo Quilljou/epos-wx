@@ -64,14 +64,14 @@ class Home extends React.Component {
             <div>
               <div className={styles.title}>总收入 <span className={styles.unit}>(元)</span></div>
               <div className={styles.amount}>
-                <CountAmount end={tradeQty}></CountAmount>
+                <CountAmount end={tradeSum}></CountAmount>
               </div>
             </div>
 
             <div>
-              <div className={styles.title}>订单数 <span className={styles.unit}>(笔)</span></div>
+              <div className={styles.title}>单据数 <span className={styles.unit}>(笔)</span></div>
               <div className={styles.amount}>
-                <CountAmount end={tradeSum}></CountAmount>
+                <CountAmount end={tradeQty} decimals={0}></CountAmount>
               </div>
             </div>
 
@@ -80,16 +80,16 @@ class Home extends React.Component {
         <div className={styles.second}>
 
             <div>
-              <div className={styles.title}>退单额 <span className={styles.unit}>(元)</span></div>
+              <div className={styles.title}>退货金额 <span className={styles.unit}>(元)</span></div>
               <div className={styles.amount}>
                 <CountAmount end={refundSum}></CountAmount>
               </div>
             </div>
 
             <div>
-              <div className={styles.title}>退单数 <span className={styles.unit}>(笔)</span></div>
+              <div className={styles.title}>退货数量</div>
               <div className={styles.amount}>
-                <CountAmount end={refundQty}></CountAmount>
+                <CountAmount end={refundQty} decimals={3}></CountAmount>
               </div>
             </div>
 
