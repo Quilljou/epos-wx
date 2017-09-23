@@ -10,13 +10,21 @@ export default function ListItem({item}) {
       <div className={styles.logo}>
         <img src={item.icon}></img>
         <div className={styles.name}>
-          {item.name}
+          <div>
+            {item.name}
+          </div>
+          <div>
+            {item.number}
+            <span className="unit">(次)</span>
+          </div>
         </div>
       </div>
 
       <div className={styles.content}>
-        <span className="yuan">￥</span>
-        {item.sum}
+        <div className="money">
+          <span className="unit">￥</span>
+          {item.sum}
+        </div>
       </div>
     </div>
   )

@@ -15,7 +15,7 @@ export default function DiscountItem(props) {
         </div>
       </div>
 
-      <div className={styles.right}>
+      <div className={styles.right + " money"}>
         <span className="yuan">￥</span>
         { sum }
       </div>

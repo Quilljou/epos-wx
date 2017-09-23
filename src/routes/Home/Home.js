@@ -1,18 +1,11 @@
 import React from 'react';
 import {connect} from 'dva';
 import Helmet from 'react-helmet';
-// import DataBox from '../components/DataBox';
-// import BranchPicker from '../components/BranchPicker'
 import {WhiteSpace, WingBlank, Button} from 'antd-mobile';
 import styles from './index.less'
 import ListWarn from '../../components/ListWarn/'
-// import ItemHead from '../components/ItemHead'
-// import styles from './main.css';
-// import ItemList from '../components/ItemList';
-// import RankBar from '../components/RankBar';
 import { getNow, goTo } from '../../utils/util'
 import title  from '../../utils/title';
-// import { today } from '../utils/constant'
 import MachinePicker from './components/MachinePicker/'
 import DatePicker from './components/DatePicker/'
 import DataBox from './components/DataBox/'
@@ -20,9 +13,7 @@ import ListItem from './components/ListItem/'
 import CountAmount from './components/CountAmount/'
 import DiscountItem from './components/DiscountItem/'
 import moment from 'moment'
-
-
-
+import TableItem from './components/TableItem/'
 
 
 
@@ -62,14 +53,14 @@ class Home extends React.Component {
         <div className={styles.total}>
 
             <div>
-              <div className={styles.title}>总收入 <span className={styles.unit}>(元)</span></div>
+              <div className={styles.title}>总收入 <span className="unit">(元)</span></div>
               <div className={styles.amount}>
                 <CountAmount end={tradeSum}></CountAmount>
               </div>
             </div>
 
             <div>
-              <div className={styles.title}>单据数 <span className={styles.unit}>(笔)</span></div>
+              <div className={styles.title}>单据数 <span className="unit">(笔)</span></div>
               <div className={styles.amount}>
                 <CountAmount end={tradeQty} decimals={0}></CountAmount>
               </div>
@@ -80,7 +71,7 @@ class Home extends React.Component {
         <div className={styles.second}>
 
             <div>
-              <div className={styles.title}>退货金额 <span className={styles.unit}>(元)</span></div>
+              <div className={styles.title}>退货金额 <span className="unit">(元)</span></div>
               <div className={styles.amount}>
                 <CountAmount end={refundSum}></CountAmount>
               </div>
@@ -100,9 +91,8 @@ class Home extends React.Component {
 
 
   renderContent = () => {
-    const { machine, selectedMachine, start, end, payment, discount } = this.props.app;
+    const { machine, selectedMachine, start, end, payment, discount, cate, product } = this.props.app;
     const { dispatch } = this.props;
-
     const MachinePickerProps = {
       machine,
       onChange: (selectedMachine) => {
@@ -136,6 +126,15 @@ class Home extends React.Component {
       }
     }
 
+    // const data = [];
+    // const makeRandomNumber = () => {
+    //   return Math.floor(Math.random() * 200)
+    // }
+    // for (var i = 0; i < 2; i++) {
+    //   data.push(
+    //     {key: i, name: '湘菜', number:makeRandomNumber() , sum: makeRandomNumber(), refundQty: 3, refundSum: makeRandomNumber(), discountSum: 20, discountQty: makeRandomNumber(),percent: 40 },
+    //   )
+    // }
 
     return (
       <div>
@@ -151,12 +150,10 @@ class Home extends React.Component {
 
         <WingBlank
           size="lg">
-          <WhiteSpace size="lg"></WhiteSpace>
+          <WhiteSpace size="md"></WhiteSpace>
 
           {this.renderConclusion()}
 
-          <WhiteSpace size="lg"></WhiteSpace>
-          <WhiteSpace size="lg"></WhiteSpace>
 
           <DataBox
             title="支付方式">
@@ -173,8 +170,6 @@ class Home extends React.Component {
             }
           </DataBox>
 
-          <WhiteSpace size="lg"></WhiteSpace>
-          <WhiteSpace size="lg"></WhiteSpace>
 
           <DataBox
             title="折扣">
@@ -188,6 +183,22 @@ class Home extends React.Component {
               <ListWarn></ListWarn>
 
             }
+          </DataBox>
+
+
+          <DataBox
+            title="商品分类">
+            <TableItem
+              data={cate}
+              type="cate"
+            />
+          </DataBox>
+
+          <DataBox
+            title="菜品排行">
+            <TableItem
+              data={product}
+              ></TableItem>
           </DataBox>
 
           <WhiteSpace size="sm"></WhiteSpace>
@@ -211,32 +222,6 @@ class Home extends React.Component {
 						:
 					this.renderNoRecords()
 				}
-
-        {/* <BranchPicker {...BranchPickerProps}></BranchPicker> */}
-
-        {/* <WingBlank size="sm">
-
-                    <ItemHead title="支付方式统计" icon={require( '../assets/img/wallet.png')}></ItemHead>
-                    {income.length
-                        ?
-                        income.map( (item, index) => {
-                            return <ItemList {...{item}} key={index}></ItemList>
-                        })
-                        :
-                        <ListWarn style={{borderColor: '#ddd'}}></ListWarn>
-                    }
-
-
-                    <ItemHead title="菜品排行(份)" icon={require( '../assets/img/plate.png')}></ItemHead>
-                    {dishes.length
-                        ?
-                        dishes.map( (item,index) =>
-                         <RankBar {...{item}} key={index}></RankBar>)
-                        :
-                        <ListWarn style={{borderColor: '#ddd'}}></ListWarn>
-                    }
-
-                </WingBlank> */}
       </div>
     )
   }

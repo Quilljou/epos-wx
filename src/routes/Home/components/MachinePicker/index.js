@@ -24,7 +24,7 @@ export default function MachinePicker (props) {
     >
       <img src={arrowDown} alt=""/>
       &nbsp;
-      {props.extra}
+      <div className={styles.extra}>{props.extra}</div>
     </div>
   );
 

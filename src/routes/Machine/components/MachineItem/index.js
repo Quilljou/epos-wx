@@ -18,10 +18,8 @@ class MachineItem extends React.Component {
   }
 
   handleVisibleChange = (popOverVisible) => {
-    console.log(popOverVisible);
-
    this.setState({
-    popOverVisible,
+    popOverVisible
    });
   }
 
@@ -36,6 +34,9 @@ class MachineItem extends React.Component {
     })
   }
 
+  goTop = (id) => {
+
+  }
   handleSelect = (node,index) => {
     const {
       id,
@@ -43,11 +44,19 @@ class MachineItem extends React.Component {
     } = this.props;
 
     this.toggle(false); // 关闭popover
-    console.log(this.props);
 
     switch (node.key) {
       case 'pwd':
         goTo(`/machine/pwd/${id}`)
+        break;
+      case 'name':
+        goTo(`/machine/update/${id}`)
+        break;
+      case 'top':
+        dispatch({
+          type: "app/goTop",
+          payload: { id }
+        })
         break;
       case 'delete':
         alert('删除', '确定删除么?', [
@@ -60,11 +69,6 @@ class MachineItem extends React.Component {
           }, style: { fontWeight: 'bold' } },
         ])
     }
-    // this.props.onSelect(id,node.key);
-  }
-
-  handleClickItem = () => {
-    goTo(`/machine/update/${this.props.id}`);
   }
 
   render () {
@@ -75,8 +79,9 @@ class MachineItem extends React.Component {
 
 
     return (
-      <div onClick={this.handleClickItem} className={styles.machineItem}>
+      <div className={styles.machineItem}>
         <Popover
+              mask
               visible={this.state.popOverVisible}
               onSelect={this.handleSelect}
               onVisibleChange={this.handleVisibleChange}
@@ -88,10 +93,20 @@ class MachineItem extends React.Component {
                     删除
                   </Item>),
                 (<Item key="pwd"
-                  icon={<Icon type={require('!svg-sprite!../../../../assets/img/edit.svg')} size="xs"/>}
+                  icon={<Icon type={require('!svg-sprite!../../../../assets/img/password.svg')} size="xs"/>}
                   >
                    改密
-                 </Item>)
+                 </Item>),
+                 (<Item key="name"
+                   icon={<Icon type={require('!svg-sprite!../../../../assets/img/edit.svg')} size="xs"/>}
+                   >
+                    改名
+                  </Item>),
+                  (<Item key="top"
+                    icon={<Icon type={require('!svg-sprite!../../../../assets/img/top.svg')} size="xs"/>}
+                    >
+                     置顶
+                   </Item>)
               ]}
               align={{
                 overflow: { adjustY: 0, adjustX: 0 },

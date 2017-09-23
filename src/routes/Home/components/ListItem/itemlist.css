@@ -20,7 +20,7 @@
 .content {
   flex: 1;
   display: flex;
-  color: #7ec2f3;
+
   align-items: center;
   justify-content: flex-end
 }

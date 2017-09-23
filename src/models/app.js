@@ -18,7 +18,9 @@ export default {
     refundQty: 0,
     refundSum: 0,
     tradeQty: 0,
-    tradeSum: 0
+    tradeSum: 0,
+    cate: [], // 分类
+    product: [], // 菜品
   },
   reducers : {
     changeSelectedBar(state, { payload }) {
@@ -30,7 +32,6 @@ export default {
     },
 
     save(state, { payload }) {
-      console.log(payload);
       const newState  = {...state, ...payload};
       localStorage.setItem('machine', JSON.stringify(newState.machine))
       return newState;
@@ -66,7 +67,9 @@ export default {
     // 初始化app，查询机器和数据
     *queryMachine({
       payload
-    }, {call, put, select}) {
+    }, action) {
+      const {call, put, select} = action;
+
       let app = yield select(state => state.app);
       let machine = JSON.parse(localStorage.getItem('machine'));
 
@@ -84,20 +87,29 @@ export default {
             }
         })
 
-        const response = yield call(queryData,{
-          id,
-          password,
-          start: start.format('YYYY-MM-DD'),
-          end: end.format('YYYY-MM-DD')
-        });
-
-        // 返回正确数据显示
-        if(response && response.status) {
-          yield put({
-              type: 'save',
-              payload: response.data
-          })
-        }
+        yield put({
+          type: 'queryData',
+          payload: {
+            id,
+            password,
+            start,
+            end
+          }
+        })
+        // const response = yield call(queryData,{
+        //   id,
+        //   password,
+        //   start: start.format('YYYY-MM-DD'),
+        //   end: end.format('YYYY-MM-DD')
+        // });
+        //
+        // // 返回正确数据显示
+        // if(response && response.status) {
+        //   yield put({
+        //       type: 'save',
+        //       payload: response.data
+        //   })
+        // }
         // else {
         //   yield put({
         //       type: 'save',
@@ -112,6 +124,31 @@ export default {
         //   })
         // }
       }
+    },
+    *goTop({
+      payload
+    }, {call, put, select}) {
+      const { id } = payload;
+      let app = yield select(state => state.app);
+      let { machine } = app;
+      if(machine.length <= 1) {
+        return;
+      }
+      let splicedMachine = null;
+      machine.forEach((item,index) => {
+        if(item.id === id) {
+          splicedMachine = index;
+        }
+      })
+      splicedMachine = machine.splice(splicedMachine,1)[0];
+      machine.unshift(splicedMachine);
+      yield put({
+          type: 'save',
+          payload: {
+            machine,
+            selectedMachine: machine[0].id
+        }
+      })
     },
 
     *deleteMachine({
@@ -185,7 +222,6 @@ export default {
 
       // 如果根据日期查询，没有id，则是选中id
       if(!id) id = selectedMachine;
-      console.log(id);
       // 找到匹配的id
       machine.forEach(item => {
         if(item.id === id) {
@@ -202,9 +238,14 @@ export default {
       });
 
       if(response && response.status) {
+
+        Toast.info('查询报表成功', 1.5,null, false);
+
+        const { total, cate, product} = response.data;
+
         yield put({
             type: 'save',
-            payload: {...response.data, selectedMachine: id, start, end}
+            payload: { ...total, cate, product, selectedMachine: id, start, end}
         })
       }else{
         yield put({

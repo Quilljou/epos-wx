@@ -24,7 +24,7 @@ export default {
       ],
       "proxy": {
          "/api": {
-           "target": "http://116.62.68.144",
+           "target": "http://machine.esyos.com",
            "changeOrigin": true,
           //  "pathRewrite": { "^/api?" : "" }
          }
@@ -32,6 +32,7 @@ export default {
     },
     production: {
       svgSpriteLoaderDirs: svgSpriteDirs,
+
       extraBabelPlugins: [
         'transform-runtime',
         ['import', { 'libraryName': 'antd-mobile',  'style': true }]
@@ -43,5 +44,6 @@ export default {
         }),
       ],
     }
-  }
+  },
+  hash: true
 }
